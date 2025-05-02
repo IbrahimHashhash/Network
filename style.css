@@ -54,8 +54,8 @@ body {
 }
 
 .topic-box img {
-    width: 100%;          /* full width inside box */
-    max-width: 500px;      /* allow bigger image */
+    width: 100%;         
+    max-width: 500px;      
     height: auto;
     border-radius: 8px;
     margin-bottom: 15px;
@@ -136,16 +136,12 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 ul[lang="ar"] {
-    list-style-position: inside; /* Keeps the bullet points inside the list */
-    direction: rtl; /* Makes the list direction right-to-left */
+    list-style-position: inside; 
+    direction: rtl; 
 }
 ol[lang="ar"] {
     list-style-position: inside; 
     direction: rtl; 
-}
-ul[lang="en"] {
-    list-style-position: outside; /* Keeps the bullet points outside the list */
-    direction: ltr; /* Makes the list direction left-to-right */
 }
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
