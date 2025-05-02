@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>خادم الويب - ENCS3320</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="blue-title">مرحبًا بكم في خادم الويب لمادة ENCS3320 - شبكات الحاسوب</h1>
+
+<div class="team">
+    <div class="member">
+        <img src="images/ibrahim.jpg" alt="إبراهيم أبوهشهش" class="profile-pic">
+        <h3>إبراهيم أبوهشهش</h3>
+        <p>الرقم الجامعي: 1221140</p>
+        <p>المهارات: تعلم الآلة، بايثون</p>
+        <p>المشاريع: روبوت محادثة، آلة حاسبة</p>
+        <p>الهوايات: الشطرنج، البرمجة</p>
+    </div>
+
+    <div class="member">
+        <img src="images/mattour.png" alt="عبدالله مطور" class="profile-pic">
+        <h3>عبدالله مطور</h3>
+        <p>الرقم الجامعي: 1223061</p>
+        <p>المهارات: جافا، حل المشكلات</p>
+        <p>المشاريع: التجارة الإلكترونية، تطوير الألعاب</p>
+        <p>الهوايات: كرة القدم، السباحة</p>
+    </div>
+</div>
+<a href="main_en.html" id="version">العربية</a>
+
+
+<br>
+<hr>
+
+<h1 class="blue-title">أمن الشبكات</h1>
+
+<p><strong>أمن الشبكات</strong> هو مجال حيوي يركز على فهم طرق الهجوم على شبكات الحاسوب والدفاع ضدها. يتضمن ذلك معرفة كيفية عمل المهاجمين وتصميم أنظمة مقاومة للتهديدات.</p>
+
+<h2 style="color:darkgreen;">أمن الشبكات</h2>
+
+<ul lang="ar">
+    <li><em>كيفية هجوم المهاجمين على شبكات الحاسوب</em></li>
+    <li><em>كيفية الدفاع عن الشبكات ضد الهجمات</em></li>
+    <li><em>كيفية تصميم هياكل شبكية منيعة ضد الهجمات</em></li>
+</ul>
+
+<p>لم يتم تصميم الإنترنت في الأصل مع مراعاة الأمن بشكل قوي، بل كان مخصصًا لـ<em>"مجموعة من المستخدمين الذين يثقون ببعضهم البعض ويتصلون بشبكة شفافة."</em> اليوم، يعمل مصممو البروتوكولات على تدارك الأمر وجعل الأمن جزءًا أساسيًا من جميع طبقات الشبكة!</p>
+
+<hr>
+
+<div class="topics-grid">
+    <div class="topic-box">
+        <h2 style="color:darkblue;">البرمجيات الخبيثة</h2>
+        <p><strong>البرمجيات الخبيثة (Malware)</strong> يمكن أن تصيب الأجهزة بعدة طرق:</p>
+        <ol>
+            <li><strong>فيروس:</strong> عدوى ذاتية الانتشار تنتشر عبر تنفيذ كائنات مثل مرفقات البريد الإلكتروني.</li>
+            <li><strong>دودة:</strong> عدوى ذاتية الانتشار تستلم الكائنات وتنفذها بشكل سلبي.</li>
+        </ol>
+        <p>بالإضافة إلى ذلك، يمكن لبرمجيات <strong>التجسس</strong> أن تقوم بـ:</p>
+        <ul lang="ar">
+            <li>تسجيل ضغطات المفاتيح</li>
+            <li>تعقب المواقع التي تمت زيارتها</li>
+            <li>رفع البيانات المسروقة إلى موقع تجميع</li>
+        </ul>
+        <p>وقد تصبح الأجهزة المصابة جزءًا من <strong>شبكة بوت نت</strong> تستخدم لإرسال البريد المزعج أو شن هجمات حجب الخدمة (DDoS).</p>
+        <img src="images/malware.png" alt="برمجيات خبيثة" width="300" class="info-img">
+    </div>
+
+    <div class="topic-box">
+        <h2 style="color:darkblue;">المهاجمون: هجمات حجب الخدمة (DoS)</h2>
+        <p><strong>هجمات حجب الخدمة (DoS)</strong> تغمر الخادم أو المورد الشبكي بحركة مرور وهمية مما يجعله غير متاح للمستخدمين الشرعيين.</p>
+        <p>خطوات الهجوم:</p>
+        <ol lang="ar">
+            <li>اختيار الهدف</li>
+            <li>اختراق أجهزة متصلة بالشبكة (بوت نت)</li>
+            <li>إرسال كميات هائلة من الحزم من الأجهزة المخترقة</li>
+        </ol>
+        <img src="images/DoS.png" alt="هجوم حجب الخدمة" width="300" class="info-img">
+    </div>
+
+    <div class="topic-box">
+        <h2 style="color:purple;">المهاجمون: اعتراض الحزم</h2>
+        <p>من خلال <strong>التنصت على الحزم (Packet Sniffing)</strong>، يمكن للمهاجمين التقاط حركة المرور على الشبكة وسرقة معلومات حساسة مثل كلمات المرور، خاصة في:</p>
+        <ul lang="ar">
+            <li>وسائط البث (مثل الإيثرنت المشترك أو الشبكات اللاسلكية)</li>
+        </ul>
+        <p>واجهة الشبكة في وضع <em>الاستقبال الشامل (Promiscuous Mode)</em> تستطيع قراءة جميع الحزم المارة. من أشهر أدوات التنصت برنامج <strong>Wireshark</strong>.</p>
+        <img src="images/sniffing.png" alt="التنصت على الحزم" width="300" class="info-img">
+    </div>
+
+    <div class="topic-box">
+        <h2 style="color:brown;">المهاجمون: انتحال الهوية (IP Spoofing)</h2>
+        <p><strong>انتحال عنوان IP</strong> يعني إرسال حزم بيانات بعنوان مصدر مزيف لإخفاء هوية المهاجم.</p>
+        <img src="images/spoofing.png" alt="انتحال عنوان IP" width="300" class="info-img">
+    </div>
+</div>
+
+<br>
+
+<footer class="footer">
+    <div class="footer-links">
+        <a href="https://gaia.cs.umass.edu/kurose_ross/index.php" target="_blank">موقع الكتاب الإلكتروني</a>
+        <a href="https://www.birzeit.edu/" target="_blank">جامعة بيرزيت</a>
+        <a href="mySite_1221140_ar.html">زيارة موقعي</a>
+    </div>
+    <p class="footer-credit">© 2025 ENCS3320 - جميع الحقوق محفوظة</p>
+</footer>
+
+</body>
+</html>

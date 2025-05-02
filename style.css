@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.blue-title {
+    color: blue;
+    text-align: center;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.member {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    width: 220px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: contain; 
+    object-position: center center; /* Default, but good to be explicit */
+
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 30px;
+    margin: 40px;
+}
+
+.topic-box {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.topic-box:hover {
+    transform: scale(1.02);
+}
+
+.topic-box img {
+    width: 100%;          /* full width inside box */
+    max-width: 500px;      /* allow bigger image */
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.topic-box p, 
+.topic-box ol, 
+.topic-box ul {
+    font-size: 13px;
+    color: #555;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.topic-box h3 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+.footer {
+    background-color: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+}
+
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    display: inline-block;
+    margin: 10px;
+    color: #4FC3F7;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #81D4FA;
+    text-decoration: underline;
+}
+
+.footer-credit {
+    font-size: 12px;
+    color: #777;
+}
+#version {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    background-color: lightblue;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+    color:black
+}
+#version:hover {
+    background-color: #81D4FA;
+    color: white;
+    text-decoration: none;
+}
+#version:active {
+    background-color: #4FC3F7;
+    color: white;
+    text-decoration: none;
+}
+.profile-pic:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+ul[lang="ar"] {
+    list-style-position: inside; /* Keeps the bullet points inside the list */
+    direction: rtl; /* Makes the list direction right-to-left */
+}
+ol[lang="ar"] {
+    list-style-position: inside; 
+    direction: rtl; 
+}
+ul[lang="en"] {
+    list-style-position: outside; /* Keeps the bullet points outside the list */
+    direction: ltr; /* Makes the list direction left-to-right */
+}
