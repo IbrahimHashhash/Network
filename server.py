@@ -1,10 +1,8 @@
 from socket import *
 
-# Settings
 HOST = 'localhost'
-PORT = 9956  # Your derived port
+PORT = 9956  
 
-# Start the server
 serverSocket = socket(AF_INET, SOCK_STREAM)
 serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 serverSocket.bind((HOST, PORT))
@@ -23,7 +21,6 @@ while True:
 
         print("[HTTP Request]\n" + request)
 
-        # Parse request
         request_line = request.split('\n')[0]
         parts = request_line.split()
         if len(parts) < 2:
@@ -41,7 +38,6 @@ while True:
         elif path == '/mySite_1221140_ar.html':
             filename = 'mySite_1221140_ar.html'
         elif path.startswith('/search'):
-            # manually parse query string
             query = path.split('?')[-1]
             params = {}
             for pair in query.split('&'):
@@ -51,12 +47,9 @@ while True:
             
             filename = params.get('filename', '')
             filetype = params.get('type', 'images')
-
-            # Check if file exists
             file_path = f"{filetype}/{filename}"
             try:
                 with open(file_path, 'rb'):
-                    # File exists → redirect
                     redirect_path = '/' + file_path
                     response = (
                         "HTTP/1.1 302 Found\r\n"
@@ -65,7 +58,6 @@ while True:
                     )
                     print(f"[Redirect] 302 Found → {redirect_path}")
             except:
-                # File doesn't exist → redirect to Google
                 google_type = 'isch' if filetype == 'images' else 'vid'
                 google_url = f"https://www.google.com/search?tbm={google_type}&q={filename}"
                 response = (
@@ -81,12 +73,10 @@ while True:
         else:
             filename = path.strip('/')
 
-        # Try to serve the file
         try:
             with open(filename, 'rb') as f:
                 content = f.read()
             
-            # Determine content-type
             if filename.endswith('.html'):
                 content_type = 'text/html'
             elif filename.endswith('.css'):
