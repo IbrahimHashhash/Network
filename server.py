@@ -62,7 +62,7 @@ while True:
                     f"Location: {google_url}\r\n"
                     "Connection: close\r\n\r\n"
                 )
-                print(f"[Redirect] 307 Temporary Redirect → {google_url}")
+                print(f"[Redirect] 307 Temporary Redirect  {google_url}")
             
             clientSocket.sendall(response.encode())
             clientSocket.close()
