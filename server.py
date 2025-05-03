@@ -4,7 +4,6 @@ HOST = 'localhost'
 PORT = 9956  
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
-serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 serverSocket.bind((HOST, PORT))
 serverSocket.listen(1)
 print(f"Server is running on {HOST}:{PORT}...")
