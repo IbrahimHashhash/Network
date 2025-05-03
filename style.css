@@ -10,27 +10,46 @@ body {
 .team {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
 }
 
 .member {
-    border: 2px solid #ccc;
-    padding: 10px;
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
     border-radius: 10px;
-    width: 220px;
-    background-color: #f9f9f9;
+    padding: 20px;
+    width: 250px;
     text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-.profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    object-fit: contain; 
-    object-position: center center; /* Default, but good to be explicit */
 
-  }
+.member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #3498db;
+}
+
+.member h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+.member p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #555;
+}
 
   .topics-grid {
     display: grid;
@@ -142,14 +161,6 @@ ul[lang="ar"] {
 ol[lang="ar"] {
     list-style-position: inside; 
     direction: rtl; 
-}
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    text-align: right;
 }
 h1 {
     color: #2c3e50;
