@@ -7,14 +7,13 @@
 </head>
 <body>
     <h1>Network Security Resource Finder</h1>
-    
     <div class="form-container">
         <p>Enter the name of an image or video related to network security that you're looking for:</p>
         
         <form action="/search" method="get">
             <div class="form-group">
                 <label for="filename">Filename:</label>
-                <input type="text" id="filename" name="filename" placeholder="Enter filename (e.g., malware.jpg, ddos.mp4)" required>
+                <input type="text" id="filename" name="filename" placeholder="Enter filename" required>
             </div>
             
             <div class="form-group">
@@ -24,7 +23,6 @@
                     <option value="videos">Video</option>
                 </select>
             </div>
-            
             <button type="submit">Search</button>
         </form>
         

@@ -19,7 +19,6 @@ while True:
             continue
 
         print("[HTTP Request]\n" + request)
-
         request_line = request.split('\n')[0]
         parts = request_line.split()
         if len(parts) < 2:
@@ -27,7 +26,6 @@ while True:
             continue
         
         method, path = parts[0], parts[1]
-
         if path == '/' or path == '/index.html' or path == '/main_en.html':
             filename = 'main_en.html'
         elif path == '/main_ar.html':
