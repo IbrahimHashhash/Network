@@ -18,6 +18,7 @@ udp_clients = {}  # name -> (udp_addr)
 lock = threading.Lock()
 secret_number = None
 winner_announced = False
+game_started = False
 
 
 def broadcast_tcp(message):
@@ -29,9 +30,8 @@ def broadcast_tcp(message):
             except:
                 print(f"[ERROR] Failed to send TCP to {name}")
 
-
 def handle_client(conn, addr):
-    global clients, udp_clients
+    global clients, udp_clients, game_started
 
     try:
         conn.sendall("Welcome! Please join with 'JOIN <username>'\n".encode())
@@ -50,21 +50,28 @@ def handle_client(conn, addr):
             clients[username] = (conn, addr)
 
         print(f"[JOINED] {username} from {addr}")
-        conn.sendall(f"Hello {username}! Waiting for other players...\n".encode())
+        broadcast_tcp(f"{username} joined. Waiting for more players...\n")
 
-        # Wait for game to start
-        while len(clients) < MIN_PLAYERS:
-            time.sleep(1)
+        # Unified atomic block to check and start game
+        with lock:
+            if len(clients) >= MIN_PLAYERS and not game_started:
+                game_started = True
+                threading.Thread(target=start_game, daemon=True).start()
 
-        if len(clients) == MIN_PLAYERS:
-            start_game()
+        # Keep client alive to detect disconnection
+        while True:
+            try:
+                conn.sendall(b"")
+                time.sleep(1)
+            except:
+                break
 
     except Exception as e:
-        print(f"[ERROR] Client handler: {e}")
+        print(f"[ERROR] Client handler error: {e}")
     finally:
         with lock:
             if username in clients:
-                clients.pop(username)
+                clients.pop(username, None)
                 udp_clients.pop(username, None)
                 broadcast_tcp(f"{username} has disconnected.\n")
                 print(f"[DISCONNECT] {username} removed.")
