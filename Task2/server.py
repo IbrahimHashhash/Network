@@ -1,24 +1,31 @@
 from socket import *
 
+# Server configuration
 HOST = 'localhost'
 PORT = 9910 
 
+# Create a TCP socket
 serverSocket = socket(AF_INET, SOCK_STREAM)
 serverSocket.bind((HOST, PORT))
-serverSocket.listen(1)
+serverSocket.listen(1)  # Listen for 1 connection at a time
 print(f"Server is running on {HOST}:{PORT}...")
 
+# Main server loop
 while True:
+    # Accept client connection
     clientSocket, addr = serverSocket.accept()
     print(f"\n[Connected] {addr[0]}:{addr[1]}")
     
     try:
+        # Receive and decode HTTP request
         request = clientSocket.recv(1024).decode()
         if not request:
             clientSocket.close()
             continue
 
         print("[HTTP Request]\n" + request)
+        
+        # Parse the request line to get method and path
         request_line = request.split('\n')[0]
         parts = request_line.split()
         if len(parts) < 2:
@@ -26,6 +33,8 @@ while True:
             continue
         
         method, path = parts[0], parts[1]
+        
+        # Route to appropriate HTML files
         if path == '/' or path == '/index.html' or path == '/main_en.html':
             filename = 'main_en.html'
         elif path == '/main_ar.html':
@@ -34,7 +43,9 @@ while True:
             filename = 'mySite_1221140_en.html'
         elif path == '/mySite_1221140_ar.html':
             filename = 'mySite_1221140_ar.html'
+        # Handle search functionality
         elif path.startswith('/search'):
+            # Extract query parameters
             query = path.split('?')[-1]
             params = {}
             for pair in query.split('&'):
@@ -42,11 +53,20 @@ while True:
                     key, value = pair.split('=')
                     params[key] = value
             
+            # Get filename and filetype from parameters
             filename = params.get('filename', '')
-            filetype = params.get('type', 'images')
-            file_path = f"{filetype}/{filename}"
+            filetype = params.get('type', 'imgs')  # Default to 'imgs' folder
+            
+            # Handle the new folder structure with subfolders
+            if filetype == 'imgs':
+                file_path = f"{filetype}/material-pics/{filename}"  # Updated path with subfolder
+            else:
+                file_path = f"{filetype}/{filename}"
+                
             try:
+                # Check if file exists locally
                 with open(file_path, 'rb'):
+                    # If found, redirect to local file
                     redirect_path = '/' + file_path
                     response = (
                         "HTTP/1.1 302 Found\r\n"
@@ -55,7 +75,8 @@ while True:
                     )
                     print(f"[Redirect] 302 Found → {redirect_path}")
             except:
-                google_type = 'isch' if filetype == 'images' else 'vid'
+                # If not found locally, redirect to Google search
+                google_type = 'isch' if filetype == 'imgs' else 'vid'  # 'isch' for images, 'vid' for videos
                 google_url = f"https://www.google.com/search?tbm={google_type}&q={filename}"
                 response = (
                     "HTTP/1.1 307 Temporary Redirect\r\n"
@@ -64,16 +85,20 @@ while True:
                 )
                 print(f"[Redirect] 307 Temporary Redirect  {google_url}")
             
+            # Send redirect response and close connection
             clientSocket.sendall(response.encode())
             clientSocket.close()
             continue
         else:
+            # For other paths, try to serve the file directly
             filename = path.strip('/')
 
         try:
+            # Try to open and read the requested file
             with open(filename, 'rb') as f:
                 content = f.read()
             
+            # Determine content type based on file extension
             if filename.endswith('.html'):
                 content_type = 'text/html'
             elif filename.endswith('.css'):
@@ -87,6 +112,7 @@ while True:
             else:
                 content_type = 'application/octet-stream'
             
+            # Create and send HTTP response header
             header = (
                 "HTTP/1.1 200 OK\r\n"
                 f"Content-Type: {content_type}\r\n"
@@ -98,6 +124,7 @@ while True:
             clientSocket.sendall(header + content)
 
         except FileNotFoundError:
+            # Handle file not found error with a 404 response
             body = (
                 "<html><head><title>Error 404</title></head>"
                 "<body><h1 style='color:red;'>The file is not found</h1>"
@@ -115,8 +142,10 @@ while True:
             print(f"[Error] 404 Not Found for {addr[0]}:{addr[1]}")
             clientSocket.sendall(header + body)
 
+        # Close the connection
         clientSocket.close()
 
     except Exception as e:
+        # Handle any other errors
         print(f"[Server Error] {e}")
         clientSocket.close()
