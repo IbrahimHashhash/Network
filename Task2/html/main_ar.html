@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>خادم الويب - ENCS3320</title>
+    <!-- Link to external CSS stylesheet -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+<main>
+<!-- Language switch link to the English version -->
 <a href="main_en.html" id="version">الإنجليزية</a>
+
+<!-- Main welcome header -->
 <h1 class="blue-title">مرحبًا بكم في خادم الويب لمادة ENCS3320 - شبكات الحاسوب</h1>
 
+<!-- Team member information section -->
+ <section>
 <div class="team">
+    <!-- Member 1 -->
     <div class="member">
         <img src="../imgs/profile-pics/ibrahim.jpg" alt="إبراهيم أبوهشهش" class="profile-pic">
         <h3>إبراهيم أبوهشهش</h3>
@@ -19,6 +27,7 @@
         <p>الهوايات: الشطرنج، البرمجة</p>
     </div>
 
+    <!-- Member 2 -->
     <div class="member">
         <img src="../imgs/profile-pics/mattour.png" alt="عبدالله مطور" class="profile-pic">
         <h3>عبدالله مطور</h3>
@@ -28,28 +37,32 @@
         <p>الهوايات: كرة القدم، السباحة</p>
     </div>
 </div>
-
-
+</section>
 <br>
 <hr>
 
+<!-- Network security introduction -->
 <h1 class="blue-title">أمن الشبكات</h1>
-
 <p><strong>أمن الشبكات</strong> هو مجال حيوي يركز على فهم طرق الهجوم على شبكات الحاسوب والدفاع ضدها. يتضمن ذلك معرفة كيفية عمل المهاجمين وتصميم أنظمة مقاومة للتهديدات.</p>
 
+<!-- List explaining key aspects of network security -->
 <h2 style="color:darkgreen;">أمن الشبكات</h2>
-
 <ul lang="ar">
     <li><em>كيفية هجوم المهاجمين على شبكات الحاسوب</em></li>
     <li><em>كيفية الدفاع عن الشبكات ضد الهجمات</em></li>
     <li><em>كيفية تصميم هياكل شبكية منيعة ضد الهجمات</em></li>
 </ul>
 
+<!-- Historical context about the Internet's lack of built-in security -->
 <p>لم يتم تصميم الإنترنت في الأصل مع مراعاة الأمن بشكل قوي، بل كان مخصصًا لـ<em>"مجموعة من المستخدمين الذين يثقون ببعضهم البعض ويتصلون بشبكة شفافة."</em> اليوم، يعمل مصممو البروتوكولات على تدارك الأمر وجعل الأمن جزءًا أساسيًا من جميع طبقات الشبكة!</p>
 
 <hr>
 
+<!-- Section: Topics on types of attacks -->
+ <section>
 <div class="topics-grid">
+
+    <!-- Malware explanation -->
     <div class="topic-box">
         <h2 style="color:darkblue;">المهاجمون: البرمجيات الخبيثة</h2>
         <p><strong>البرمجيات الخبيثة (Malware)</strong> يمكن أن تصيب الأجهزة بعدة طرق:</p>
@@ -67,6 +80,7 @@
         <img src="../imgs/material-pics/malware.png" alt="برمجيات خبيثة" width="300" class="info-img">
     </div>
 
+    <!-- DoS attack explanation -->
     <div class="topic-box">
         <h2 style="color:darkblue;">المهاجمون: هجمات حجب الخدمة (DoS)</h2>
         <p><strong>هجمات حجب الخدمة (DoS)</strong> تغمر الخادم أو المورد الشبكي بحركة مرور وهمية مما يجعله غير متاح للمستخدمين الشرعيين.</p>
@@ -79,6 +93,7 @@
         <img src="../imgs/material-pics/DoS.png" alt="هجوم حجب الخدمة" width="300" class="info-img">
     </div>
 
+    <!-- Packet sniffing explanation -->
     <div class="topic-box">
         <h2 style="color:purple;">المهاجمون: اعتراض الحزم</h2>
         <p>من خلال <strong>التنصت على الحزم (Packet Sniffing)</strong>، يمكن للمهاجمين التقاط حركة المرور على الشبكة وسرقة معلومات حساسة مثل كلمات المرور، خاصة في:</p>
@@ -89,15 +104,20 @@
         <img src="../imgs/material-pics/sniffing.png" alt="التنصت على الحزم" width="300" class="info-img">
     </div>
 
+    <!-- IP spoofing explanation -->
     <div class="topic-box">
         <h2 style="color:brown;">المهاجمون: انتحال الهوية (IP Spoofing)</h2>
         <p><strong>انتحال عنوان IP</strong> يعني إرسال حزم بيانات بعنوان مصدر مزيف لإخفاء هوية المهاجم.</p>
         <img src="../imgs/material-pics/spoofing.png" alt="انتحال عنوان IP" width="300" class="info-img">
     </div>
 </div>
+</section>
+
+</main>
 
 <br>
 
+<!-- Footer with links -->
 <footer class="footer">
     <div class="footer-links">
         <a href="https://gaia.cs.umass.edu/kurose_ross/index.php" target="_blank">موقع الكتاب الإلكتروني</a>
@@ -106,5 +126,6 @@
     </div>
     <p class="footer-credit">© 2025 ENCS3320 - جميع الحقوق محفوظة</p>
 </footer>
+
 </body>
 </html>

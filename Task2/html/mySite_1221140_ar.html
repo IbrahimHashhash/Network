@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl"> <!-- Set language to Arabic and text direction to right-to-left -->
 <head>
+    <!-- Page metadata and link to external CSS file -->
     <meta charset="UTF-8">
     <title>موارد أمن الشبكات</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <!-- Main page title -->
     <h1>باحث موارد أمن الشبكات</h1>
     
+    <!-- Container for the form -->
     <div class="form-container">
+        <!-- Instructional text for users -->
         <p>أدخل اسم الصورة أو الفيديو المتعلق بأمن الشبكات الذي تبحث عنه:</p>
+
+        <!-- Search form with GET method -->
         <form action="/search" method="get">
+            <!-- Filename input field -->
             <div class="form-group">
                 <label for="filename">اسم الملف:</label>
                 <input type="text" id="filename" name="filename" placeholder="أدخل اسم الملف" required>
             </div>
             
+            <!-- Dropdown menu to select resource type -->
             <div class="form-group">
                 <label for="type">نوع المحتوى:</label>
                 <select id="type" name="type">
@@ -24,9 +32,11 @@
                 </select>
             </div>
             
+            <!-- Submit button -->
             <button type="submit">بحث</button>
         </form>
         
+        <!-- Example resources available -->
         <div class="examples">
             <h3>الموارد المتاحة:</h3>
             <ul>
@@ -36,6 +46,7 @@
         </div>
     </div>
     
+    <!-- Footer with navigation links -->
     <div class="footer">
         <a href="main_ar.html">العودة إلى الصفحة الرئيسية</a>
         <a href="mySite_1221140_en.html">النسخة الإنجليزية</a>

@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Metadata and external stylesheet link -->
     <meta charset="UTF-8">
     <title>Network Security Resources</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <!-- Main page heading -->
     <h1>Network Security Resource Finder</h1>
+
+    <!-- Container for the search form -->
     <div class="form-container">
+        <!-- Description for the form -->
         <p>Enter the name of an image or video related to network security that you're looking for:</p>
         
+        <!-- Search form using GET method -->
         <form action="/search" method="get">
+            <!-- Input field for the filename -->
             <div class="form-group">
                 <label for="filename">Filename:</label>
                 <input type="text" id="filename" name="filename" placeholder="Enter filename" required>
             </div>
             
+            <!-- Dropdown to choose resource type (image or video) -->
             <div class="form-group">
                 <label for="type">Resource Type:</label>
                 <select id="type" name="type">
@@ -23,9 +31,12 @@
                     <option value="videos">Video</option>
                 </select>
             </div>
+
+            <!-- Submit button for the form -->
             <button type="submit">Search</button>
         </form>
         
+        <!-- Example list of available resources -->
         <div class="examples">
             <h3>Available Resources:</h3>
             <ul>
@@ -35,6 +46,7 @@
         </div>
     </div>
     
+    <!-- Footer with navigation links -->
     <div class="footer">
         <a href="main_en.html">Back to Main Page</a>
         <a href="mySite_1221140_ar.html">Arabic Version</a>
