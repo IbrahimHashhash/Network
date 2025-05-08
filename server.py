@@ -1,7 +1,7 @@
 from socket import *
 
 HOST = 'localhost'
-PORT = 9956  
+PORT = 9910 
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
 serverSocket.bind((HOST, PORT))
