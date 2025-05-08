@@ -35,9 +35,9 @@ while True:
         method, path = parts[0], parts[1]
         
         # Route to appropriate HTML files (now in html subfolder)
-        if path == '/' or path == '/index.html' or path == '/main_en.html':
+        if path == '/' or path == '/index.html' or path == '/main_en.html' or path == '/en':
             filename = 'html/main_en.html'
-        elif path == '/main_ar.html':
+        elif path == '/main_ar.html' or path == '/ar':
             filename = 'html/main_ar.html'
         elif path == '/mySite_1221140_en.html':
             filename = 'html/mySite_1221140_en.html'
@@ -83,7 +83,7 @@ while True:
                     f"Location: {google_url}\r\n"
                     "Connection: close\r\n\r\n"
                 )
-                print(f"[Redirect] 307 Temporary Redirect  {google_url}")
+                print(f"[Redirect] 307 Temporary Redirect → {google_url}")
             
             # Send redirect response and close connection
             clientSocket.sendall(response.encode())
