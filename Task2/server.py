@@ -34,15 +34,15 @@ while True:
         
         method, path = parts[0], parts[1]
         
-        # Route to appropriate HTML files
+        # Route to appropriate HTML files (now in html subfolder)
         if path == '/' or path == '/index.html' or path == '/main_en.html':
-            filename = 'main_en.html'
+            filename = 'html/main_en.html'
         elif path == '/main_ar.html':
-            filename = 'main_ar.html'
+            filename = 'html/main_ar.html'
         elif path == '/mySite_1221140_en.html':
-            filename = 'mySite_1221140_en.html'
+            filename = 'html/mySite_1221140_en.html'
         elif path == '/mySite_1221140_ar.html':
-            filename = 'mySite_1221140_ar.html'
+            filename = 'html/mySite_1221140_ar.html'
         # Handle search functionality
         elif path.startswith('/search'):
             # Extract query parameters
@@ -90,8 +90,11 @@ while True:
             clientSocket.close()
             continue
         else:
-            # For other paths, try to serve the file directly
-            filename = path.strip('/')
+            path_stripped = path.strip('/')
+            if path_stripped.endswith('.html'):
+                filename = 'html/' + path_stripped
+            else:
+                filename = path_stripped
 
         try:
             # Try to open and read the requested file
