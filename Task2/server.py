@@ -1,6 +1,8 @@
 from socket import *
 
 # Server configuration
+# NOTE: Replace 9910 with a port derived from your student ID
+# E.g., if student ID is 1201516, use PORT = 9956
 PORT = 9910 
 # Create a TCP socket
 serverSocket = socket(AF_INET, SOCK_STREAM)
@@ -35,10 +37,10 @@ while True:
             
             method, path = parts[0], parts[1]
             
-            # Route to appropriate HTML files (now in html subfolder)
-            if path == '/' or path == '/index.html' or path == '/main_en.html':
+            # Route to appropriate HTML files
+            if path == '/' or path == '/index.html' or path == '/main_en.html' or path == '/en':
                 filename = 'html/main_en.html'
-            elif path == '/main_ar.html':
+            elif path == '/main_ar.html' or path == '/ar':
                 filename = 'html/main_ar.html'
             elif path == '/mySite_1221140_en.html':
                 filename = 'html/mySite_1221140_en.html'
@@ -47,20 +49,20 @@ while True:
             # Handle search functionality
             elif path.startswith('/search'):
                 # Extract query parameters
-                query = path.split('?')[-1]
+                query = path.split('?')[-1] if '?' in path else ''
                 params = {}
                 for pair in query.split('&'):
                     if '=' in pair:
-                        key, value = pair.split('=')
+                        key, value = pair.split('=', 1)  # Split on first '=' only
                         params[key] = value
                 
                 # Get filename and filetype from parameters
                 filename = params.get('filename', '')
                 filetype = params.get('type', 'imgs')  # Default to 'imgs' folder
                 
-                # Handle the new folder structure with subfolders
+                # Handle the folder structure with subfolders
                 if filetype == 'imgs':
-                    file_path = f"{filetype}/material-pics/{filename}"  # Updated path with subfolder
+                    file_path = f"{filetype}/material-pics/{filename}"  # Path with subfolder
                 else:
                     file_path = f"{filetype}/{filename}"
                     
@@ -107,6 +109,8 @@ while True:
                     content_type = 'text/html'
                 elif filename.endswith('.css'):
                     content_type = 'text/css'
+                elif filename.endswith('.js'):
+                    content_type = 'text/javascript'
                 elif filename.endswith('.png'):
                     content_type = 'image/png'
                 elif filename.endswith('.jpg') or filename.endswith('.jpeg'):
