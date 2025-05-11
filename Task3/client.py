@@ -1,99 +1,79 @@
 import socket
 import threading
 import sys
-import time
 
-# Game configuration
-TCP_SERVER_IP = input("Enter server IP (e.g., 127.0.0.1): ").strip()
+TCP_SERVER = input("Enter TCP server IP (e.g., 127.0.0.1): ")
 TCP_PORT = 6000
 UDP_PORT = 6001
 
-def receive_tcp_messages(tcp_socket):
-    """Listens for messages from the server (TCP control messages)."""
-    try:
-        while True:
-            msg = tcp_socket.recv(1024)
-            if not msg:
-                print("[TCP] Server closed the connection.")
-                break
-            print(f"[SERVER]: {msg.decode()}")
-    except Exception as e:
-        print(f"[ERROR] TCP receiving error: {e}")
-    finally:
-        tcp_socket.close()
-        sys.exit()
-
-
-def udp_guess_loop(username):
-    """Sends guesses via UDP and receives feedback."""
-    udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    udp_socket.settimeout(5)
-
-    print("\n🕹️ Game started! Type your number guesses below.\n")
-
+start_event = threading.Event()
+def tcp_listener(sock):
     while True:
         try:
-            guess = input("Enter your guess (number): ").strip()
-            if not guess.isdigit():
-                print("⛔ Please enter a valid number.")
+            data = sock.recv(1024)
+            if not data:
+                print("[TCP] Server closed connection.")
+                sys.exit(0)
+            message = data.decode().strip()
+
+            # 📣 Highlight disconnection messages
+            if "disconnected from the game" in message.lower():
+                print("\n📣 " + message + "\n")
+            else:
+                print("[SERVER]:", message)
+
+            if message.startswith("[PROMPT]:"):
+                prompt_msg = message.split(":", 1)[1]
+                response = input(prompt_msg + " ").strip().lower()
+                sock.sendall(response.encode())
                 continue
 
-            msg = f"{username}:{guess}"
-            udp_socket.sendto(msg.encode(), (TCP_SERVER_IP, UDP_PORT))
+            if "Guess a number between" in message:
+                start_event.set()
 
-            # Wait for server feedback
-            try:
-                response, _ = udp_socket.recvfrom(1024)
-                feedback = response.decode()
-                print(f"[FEEDBACK]: {feedback}")
-
-                if feedback == "Correct!":
-                    print("🎉 You won the round!")
-                    break
-
-            except socket.timeout:
-                print("⚠️ No response from server... try again.")
-
-        except KeyboardInterrupt:
-            print("\n[INFO] Exiting UDP guess mode.")
+        except Exception as e:
+            print(f"[ERROR] TCP Listener: {e}")
             break
 
 
+def udp_guessing(username):
+    """Guessing loop triggered only after start_event is set."""
+    udp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+    while True:
+        start_event.wait()  # block until server signals game start
+        try:
+            guess = input("Your guess: ").strip()
+            if guess.lower() == 'exit':
+                print("[EXIT] Leaving game.")
+                sys.exit(0)
+
+            udp_sock.sendto(f"{username}:{guess}".encode(), (TCP_SERVER, UDP_PORT))
+            udp_sock.settimeout(5)
+            feedback, _ = udp_sock.recvfrom(1024)
+            print("[FEEDBACK]:", feedback.decode())
+        except socket.timeout:
+            print("[TIMEOUT] No response from server.")
+        except Exception as e:
+            print(f"[ERROR] UDP Guessing: {e}")
+            break
+
 def main():
     username = input("Enter your player name: ").strip()
-    if not username:
-        print("Username cannot be empty.")
-        return
 
-    # Establish TCP connection
-    tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    tcp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        tcp_socket.connect((TCP_SERVER_IP, TCP_PORT))
+        tcp_sock.connect((TCP_SERVER, TCP_PORT))
     except Exception as e:
-        print(f"[ERROR] Could not connect to server: {e}")
+        print(f"[ERROR] Unable to connect to server: {e}")
         return
 
-    threading.Thread(target=receive_tcp_messages, args=(tcp_socket,), daemon=True).start()
+    # Receive welcome and send JOIN
+    print(tcp_sock.recv(1024).decode())
+    tcp_sock.sendall(f"JOIN {username}".encode())
 
-    # Join the game
-    join_message = f"JOIN {username}"
-    tcp_socket.sendall(join_message.encode())
-
-    # Wait for game start
-    while True:
-        try:
-            msg = tcp_socket.recv(1024).decode()
-            print(f"[SERVER]: {msg}")
-
-            if "Game started!" in msg:
-                break
-        except:
-            print("[ERROR] Lost connection before game start.")
-            return
-
-    # Begin guessing using UDP
-    udp_guess_loop(username)
-
+    threading.Thread(target=tcp_listener, args=(tcp_sock,), daemon=True).start()
+    udp_guessing(username)
 
 if __name__ == "__main__":
     main()
